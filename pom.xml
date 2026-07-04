@@ -9,14 +9,14 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>rate-limiter</name>
-    <description>Configurable, OOP rate limiter with pluggable algorithms (Strategy pattern), wired with Dagger and served over Javalin</description>
+    <description>Configurable, OOP rate limiter with pluggable algorithms (Strategy pattern), wired with Dagger and served over raw Jetty</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <dagger.version>2.51.1</dagger.version>
-        <javalin.version>6.3.0</javalin.version>
+        <jetty.version>12.0.9</jetty.version>
         <jackson.version>2.17.2</jackson.version>
         <snakeyaml.version>2.2</snakeyaml.version>
         <slf4j.version>2.0.13</slf4j.version>
@@ -32,9 +32,9 @@
         </dependency>
 
         <dependency>
-            <groupId>io.javalin</groupId>
-            <artifactId>javalin</artifactId>
-            <version>${javalin.version}</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jetty.version}</version>
         </dependency>
 
         <dependency>

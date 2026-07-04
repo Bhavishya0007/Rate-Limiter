@@ -1,8 +1,6 @@
 package com.ratelimiter.di;
 
-import com.ratelimiter.config.RateLimiterSettings;
-import com.ratelimiter.registry.RateLimiterRegistry;
-import com.ratelimiter.web.ClientKeyResolver;
+import com.ratelimiter.web.RateLimiterHandler;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -11,9 +9,5 @@ import javax.inject.Singleton;
 @Component(modules = RateLimiterModule.class)
 public interface AppComponent {
 
-    RateLimiterSettings settings();
-
-    RateLimiterRegistry registry();
-
-    ClientKeyResolver clientKeyResolver();
+    RateLimiterHandler handler();
 }

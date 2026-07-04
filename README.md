@@ -5,7 +5,8 @@ pattern: four interchangeable algorithms behind one interface, selected per
 route/client via config — no code changes needed to switch or tune a policy.
 
 Wired with [Dagger](https://dagger.dev/) for dependency injection and served
-over [Javalin](https://javalin.io/). No Spring.
+over raw [Jetty](https://jetty.org/) (its core `Handler` API, no servlet API,
+no Spring).
 
 ## Algorithms
 
@@ -29,9 +30,9 @@ src/main/java/com/ratelimiter/
   core/factory/         RateLimiterFactory (config -> strategy instance)
   config/                RateLimiterSettings + YamlConfigLoader (reads application.yml)
   registry/              RateLimiterRegistry (one limiter instance per policy+client)
-  web/                   Javalin glue: ClientKeyResolver, RateLimitExceededException, RoutePatternMatcher
+  web/                   RateLimiterHandler (Jetty Handler), ClientKeyResolver, RoutePatternMatcher
   di/                    Dagger module + component wiring it all together
-  RateLimiterApp.java    entry point: builds the Dagger graph, starts Javalin on :8080
+  RateLimiterApp.java    entry point: builds the Dagger graph, starts a Jetty Server on :8080
 src/main/resources/application.yml   named policies + route-to-policy mapping
 ```
 

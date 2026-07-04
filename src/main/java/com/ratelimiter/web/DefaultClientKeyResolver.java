@@ -1,21 +1,28 @@
 package com.ratelimiter.web;
 
-import io.javalin.http.Context;
+import org.eclipse.jetty.server.Request;
+
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 
 /**
  * Uses the {@code X-API-Key} header when present, falling back to the
- * caller's IP for anonymous requests.
+ * caller's remote address for anonymous requests.
  */
 public class DefaultClientKeyResolver implements ClientKeyResolver {
 
     private static final String API_KEY_HEADER = "X-API-Key";
 
     @Override
-    public String resolve(Context ctx) {
-        String apiKey = ctx.header(API_KEY_HEADER);
+    public String resolve(Request request) {
+        String apiKey = request.getHeaders().get(API_KEY_HEADER);
         if (apiKey != null && !apiKey.isBlank()) {
             return apiKey;
         }
-        return ctx.ip();
+        SocketAddress remote = request.getConnectionMetaData().getRemoteSocketAddress();
+        if (remote instanceof InetSocketAddress inetSocketAddress) {
+            return inetSocketAddress.getAddress().getHostAddress();
+        }
+        return remote.toString();
     }
 }
