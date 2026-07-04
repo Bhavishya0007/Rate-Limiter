@@ -1,0 +1,23 @@
+rateLimiter:
+  defaultPolicy: default
+  policies:
+    default:
+      type: TOKEN_BUCKET
+      capacity: 20
+      ratePerSecond: 5
+    login:
+      type: FIXED_WINDOW_COUNTER
+      capacity: 5
+      windowSizeMillis: 60000
+    strict:
+      type: SLIDING_WINDOW_LOG
+      capacity: 5
+      windowSizeMillis: 1000
+    export:
+      type: LEAKY_BUCKET
+      capacity: 10
+      ratePerSecond: 2
+  routes:
+    /api/login: login
+    /api/export/**: export
+    /api/demo/**: strict

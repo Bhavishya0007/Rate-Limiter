@@ -1,4 +1,4 @@
-# rate-limiter
+# Rate-Limiter
 
 A configurable rate limiter service in Java, built around the Strategy
 pattern: four interchangeable algorithms behind one interface, selected per
@@ -91,4 +91,3 @@ verified exactly (see `src/test/java/com/ratelimiter/core/algorithm/`).
 `RateLimiterFactoryTest` confirms each `RateLimiterType` resolves to the
 correct strategy class, and `RoutePatternMatcherTest` covers the route
 pattern matching used for policy selection.
-# Rate-Limiter
